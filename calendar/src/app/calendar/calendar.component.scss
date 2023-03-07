@@ -1,6 +1,7 @@
-@use '@angular/material' as mat;
 
-@include mat.core();
+@import "~/src/theme.scss";
+
+
 
 
 *{
@@ -66,6 +67,6 @@ button {
 }
 
 mat-grid-tile {
-    border: 2px solid black;
+    border: 2px solid mat-color($primary);
     
 }
