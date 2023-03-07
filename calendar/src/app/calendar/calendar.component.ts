@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
+import { CalendarService } from './calendar.service';
+
 
 
 @Component({
@@ -8,8 +9,17 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrls: ['./calendar.component.scss']
 })
 export class CalendarComponent implements OnInit {
+  weekdays: string[];
+  months: string[];
+  days: Date[];
 
-  constructor() { }
+
+  constructor(service: CalendarService) { 
+    let currentDate = new Date();
+   [this.weekdays,this.months] = [service.weekdays,service.months];
+   this.days = service.getDaysInMonth(currentDate.getMonth(),currentDate.getFullYear());
+
+  }
 
   ngOnInit(): void {
   }
