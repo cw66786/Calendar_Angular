@@ -1,5 +1,14 @@
 <div class="button_wrapper">
-    <button mat-raised-button color="primary"></button>
-    <button mat-raised-button color="primary"></button>
+    <button mat-raised-button color="primary"><</button>
+    {{this.currentDate | date: 'MMMM YYYY'}}
+    <button mat-raised-button color="primary">></button>
     
 </div>
+<div class="weekdays">
+    <div *ngFor="let dayOfWeek of weekdays">{{dayOfWeek}}</div>
+</div>
+<mat-grid-list cols="7" rowHeight="2:1">
+    
+    <mat-grid-tile *ngFor="let day of days">{{day | date: "dd"}}</mat-grid-tile>
+  </mat-grid-list>
+  
