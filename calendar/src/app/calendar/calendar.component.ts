@@ -10,21 +10,17 @@ export class CalendarComponent implements OnInit {
   weekdays: string[] = [];
   months: string[] = [];
   days: Date[] = [];
-  currentDate!: Date;
+  currentDate: Date = new Date();
   emptyDays: string[] = [];
   endingEmpties: string[] = [];
 
   constructor(private service: CalendarService) {
     [this.weekdays, this.months] = [this.service.weekdays, this.service.months];
-    
-    
-    
   }
-  
+
   ngOnInit(): void {
-    
-    this.service.date$.subscribe(res => this.currentDate = res);
-    
+    // this.service.date$.subscribe(res => this.currentDate = res);
+
     this.days = this.service.getDaysInMonth(
       this.currentDate.getMonth(),
       this.currentDate.getFullYear()
@@ -47,7 +43,8 @@ export class CalendarComponent implements OnInit {
   nextMonth() {
     if (this.days[0].getMonth() < 11) {
       this.currentDate.setMonth(this.currentDate.getMonth() + 1);
-      this.service.setDate(this.currentDate);
+      this.currentDate = new Date(this.currentDate);
+
       this.days = this.service.getDaysInMonth(
         this.currentDate.getMonth(),
         this.currentDate.getFullYear()
@@ -55,30 +52,35 @@ export class CalendarComponent implements OnInit {
       this.updateEmpties();
     } else if (this.days[0].getMonth() === 11) {
       this.currentDate.setFullYear(this.currentDate.getFullYear() + 1);
-      this.days = this.service.getDaysInMonth(
-        this.currentDate.getMonth() - 9,
-        this.currentDate.getFullYear()
-      );
-      this.updateEmpties();
-    }
-  }
-
-  previousMonth() {
-    if (this.days[0].getMonth() > 0) {
-      this.currentDate.setMonth(this.currentDate.getMonth() - 1);
+      this.currentDate.setMonth(0);
+      this.currentDate = new Date(this.currentDate);
       this.days = this.service.getDaysInMonth(
         this.currentDate.getMonth(),
         this.currentDate.getFullYear()
-      );
-      this.updateEmpties();
-    } else if (this.days[0].getMonth() === 0) {
-      this.currentDate.setFullYear(this.currentDate.getFullYear() - 1);
-
-      this.days = this.service.getDaysInMonth(
-        this.currentDate.getMonth() + 9,
+        );
+        this.updateEmpties();
+      }
+    }
+    
+    previousMonth() {
+      if (this.days[0].getMonth() > 0) {
+        this.currentDate.setMonth(this.currentDate.getMonth() - 1);
+        this.currentDate = new Date(this.currentDate);
+        this.days = this.service.getDaysInMonth(
+          this.currentDate.getMonth(),
+          this.currentDate.getFullYear()
+          );
+          this.updateEmpties();
+        } else if (this.days[0].getMonth() === 0) {
+          this.currentDate.setFullYear(this.currentDate.getFullYear() - 1);
+          this.currentDate.setMonth(11);
+          this.currentDate = new Date(this.currentDate);
+          
+          this.days = this.service.getDaysInMonth(
+            this.currentDate.getMonth(),
         this.currentDate.getFullYear()
-      );
-      this.updateEmpties();
+        );
+        this.updateEmpties();
+      }
     }
   }
-}

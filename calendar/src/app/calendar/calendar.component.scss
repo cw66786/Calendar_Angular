@@ -52,9 +52,7 @@ button,
   font-size: 1.5rem;
   font-weight: 400;
   text-decoration: underline;
-  
 }
-
 
 .days-wrapper {
   height: 50vh;
@@ -70,8 +68,8 @@ mat-grid-tile {
 }
 
 mat-grid-tile:hover {
-    background-color: mat-color($accent,A100);
-    color: mat-color($primary);
+  background-color: mat-color($accent, A100);
+  color: mat-color($primary);
 }
 
 .weekend {

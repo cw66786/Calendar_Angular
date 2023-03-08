@@ -13,10 +13,12 @@
   </mat-grid-list>
   <div class="days-wrapper">
     <mat-grid-list cols="7" rowHeight="2:1">
-      <mat-grid-tile class="days"   *ngFor="let empty of emptyDays"></mat-grid-tile>
+      <mat-grid-tile
+        class="days"
+        *ngFor="let empty of emptyDays"
+      ></mat-grid-tile>
 
       <mat-grid-tile
-        
         *ngFor="let day of days"
         [ngClass]="{ weekend: isWeekend(day) }"
         >{{ day | date : "dd" }}</mat-grid-tile
