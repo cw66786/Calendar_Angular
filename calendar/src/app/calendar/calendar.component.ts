@@ -17,12 +17,14 @@ export class CalendarComponent implements OnInit {
   constructor(private service: CalendarService) {
     [this.weekdays, this.months] = [this.service.weekdays, this.service.months];
     
-    this.service.setDate(new Date());
-    this.service.currentDate$.subscribe(res => this.currentDate = res);
+    
+    
   }
   
   ngOnInit(): void {
-
+    
+    this.service.date$.subscribe(res => this.currentDate = res);
+    
     this.days = this.service.getDaysInMonth(
       this.currentDate.getMonth(),
       this.currentDate.getFullYear()

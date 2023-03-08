@@ -22,7 +22,7 @@ export class CalendarService {
   ];
 
 
-  currentDate!: Date;
+  currentDate: Date = new Date();
   currentDate$ = new BehaviorSubject(this.currentDate);
   date$ = this.currentDate$.asObservable();
 
@@ -72,7 +72,7 @@ export class CalendarService {
 
 setDate(newDate: Date){
   this.currentDate = newDate;
-  this.currentDate$ = new BehaviorSubject(this.currentDate);
+  this.currentDate$.next(newDate);
 
 }
 
