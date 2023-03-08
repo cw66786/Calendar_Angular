@@ -1,83 +1,72 @@
-
 @import "~/src/theme.scss";
 
-
-
-
-*{
-    margin: 0;
-    padding: 0;
+* {
+  margin: 0;
+  padding: 0;
 }
 
-
-
-.button-wrapper{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 10vh;
-    width: 100vw;
+.button-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10vh;
+  width: 100vw;
 }
 
 .current {
-    margin: 20px;
-    
-    font-size: 2rem;
+  margin: 20px;
+
+  font-size: 2rem;
 }
 button,
 .mat-fab {
-    font-size: 1rem;
-    
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    height: 2rem;
-    width: 2rem;
-    background-color: mat-color($primary);
-    color: mat-color($accent,A200);
-    
+  font-size: 1rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 2rem;
+  width: 2rem;
+  background-color: mat-color($primary);
+  color: mat-color($accent, A200);
 }
 
 .calendar-wrapper {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    flex-direction: column;
-    
-    width: 100vw;
-    height: 90vh;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+
+  width: 100vw;
+  height: 90vh;
 }
 .weekdays {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    height: 5vh;
-    width: 80vw;
-    
-    font-size: 1.5rem;
-    font-weight: 400;
-    text-decoration: underline;
-    
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  height: 5vh;
+  width: 80vw;
+
+  font-size: 1.5rem;
+  font-weight: 400;
+  text-decoration: underline;
 }
 
-
-
-.days-wrapper{
-    height: 50vh;
-    width: 80vw;
-
+.days-wrapper {
+  height: 50vh;
+  width: 80vw;
 }
 
 mat-grid-tile {
-    border: 2px solid mat-color($accent);
-    background-color: mat-color($primary);
-    color: white;
-    font-size: 2rem;
-    font-weight: bold;
+  border: 2px solid mat-color($accent);
+  background-color: mat-color($primary);
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
 }
 
 .weekend {
-    color: mat-color($accent);
+  color: mat-color($accent);
 }
