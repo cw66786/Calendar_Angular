@@ -24,7 +24,8 @@
     
     font-size: 2rem;
 }
-button {
+button,
+.mat-fab {
     font-size: 1rem;
     
     display: flex;
@@ -33,6 +34,9 @@ button {
     text-align: center;
     height: 2rem;
     width: 2rem;
+    background-color: mat-color($primary);
+    color: mat-color($accent,A200);
+    
 }
 
 .calendar-wrapper {
@@ -67,6 +71,13 @@ button {
 }
 
 mat-grid-tile {
-    border: 2px solid mat-color($primary);
-    
+    border: 2px solid mat-color($accent);
+    background-color: mat-color($primary);
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.weekend {
+    color: mat-color($accent);
 }
