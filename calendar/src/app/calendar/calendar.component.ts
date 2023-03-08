@@ -10,20 +10,24 @@ export class CalendarComponent implements OnInit {
   weekdays: string[] = [];
   months: string[] = [];
   days: Date[] = [];
-  currentDate = new Date();
+  currentDate!: Date;
   emptyDays: string[] = [];
   endingEmpties: string[] = [];
 
   constructor(private service: CalendarService) {
     [this.weekdays, this.months] = [this.service.weekdays, this.service.months];
+    
+    this.service.setDate(new Date());
+    this.service.currentDate$.subscribe(res => this.currentDate = res);
   }
   
   ngOnInit(): void {
+
     this.days = this.service.getDaysInMonth(
       this.currentDate.getMonth(),
       this.currentDate.getFullYear()
     );
-   this.updateEmpties();
+    this.updateEmpties();
   }
 
   isWeekend(day: Date) {
@@ -33,55 +37,46 @@ export class CalendarComponent implements OnInit {
     return false;
   }
 
-  updateEmpties(){
+  updateEmpties() {
     this.emptyDays = this.service.getStartOfMonth(this.days);
     this.endingEmpties = this.service.getEndOfMonth(this.days, this.emptyDays);
   }
 
   nextMonth() {
-    
     if (this.days[0].getMonth() < 11) {
       this.currentDate.setMonth(this.currentDate.getMonth() + 1);
+      this.service.setDate(this.currentDate);
       this.days = this.service.getDaysInMonth(
-        (this.currentDate.getMonth()),
+        this.currentDate.getMonth(),
         this.currentDate.getFullYear()
-        );
-        this.updateEmpties();
-        
-      } else if (this.days[0].getMonth() === 11) {
+      );
+      this.updateEmpties();
+    } else if (this.days[0].getMonth() === 11) {
       this.currentDate.setFullYear(this.currentDate.getFullYear() + 1);
       this.days = this.service.getDaysInMonth(
-        (this.currentDate.getMonth() - 9),
-        this.currentDate.getFullYear() 
+        this.currentDate.getMonth() - 9,
+        this.currentDate.getFullYear()
       );
-   this.updateEmpties();
-
+      this.updateEmpties();
     }
   }
 
   previousMonth() {
-    
     if (this.days[0].getMonth() > 0) {
-      this.currentDate.setMonth(this.currentDate.getMonth()-1);
+      this.currentDate.setMonth(this.currentDate.getMonth() - 1);
       this.days = this.service.getDaysInMonth(
-        (this.currentDate.getMonth()),
+        this.currentDate.getMonth(),
         this.currentDate.getFullYear()
-        );
-        this.updateEmpties();
-        
-      } else if (this.days[0].getMonth() === 0) {
-      
-      this.currentDate.setFullYear(this.currentDate.getFullYear()-1);
+      );
+      this.updateEmpties();
+    } else if (this.days[0].getMonth() === 0) {
+      this.currentDate.setFullYear(this.currentDate.getFullYear() - 1);
 
       this.days = this.service.getDaysInMonth(
-        (this.currentDate.getMonth() + 9),
-        (this.currentDate.getFullYear())
+        this.currentDate.getMonth() + 9,
+        this.currentDate.getFullYear()
       );
-   this.updateEmpties();
-
+      this.updateEmpties();
     }
   }
-
-
-
 }

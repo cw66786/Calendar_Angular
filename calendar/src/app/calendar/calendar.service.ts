@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +20,11 @@ export class CalendarService {
     'November',
     'December',
   ];
+
+
+  currentDate!: Date;
+  currentDate$ = new BehaviorSubject(this.currentDate);
+  date$ = this.currentDate$.asObservable();
 
   constructor() {}
 
@@ -63,4 +69,11 @@ export class CalendarService {
 
     return endingEmpties;
   }
+
+setDate(newDate: Date){
+  this.currentDate = newDate;
+  this.currentDate$ = new BehaviorSubject(this.currentDate);
+
+}
+
 }

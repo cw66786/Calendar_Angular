@@ -1,7 +1,7 @@
 <div class="button-wrapper">
   <button mat-fab (click)="previousMonth()"><</button>
   <div class="current">
-    {{ this.currentDate | date : "MMMM YYYY" }}
+    {{ currentDate | date : "MMMM YYYY" }}
   </div>
   <button mat-fab (click)="nextMonth()">></button>
 </div>
@@ -13,9 +13,10 @@
   </mat-grid-list>
   <div class="days-wrapper">
     <mat-grid-list cols="7" rowHeight="2:1">
-      <mat-grid-tile *ngFor="let empty of emptyDays"></mat-grid-tile>
+      <mat-grid-tile class="days"   *ngFor="let empty of emptyDays"></mat-grid-tile>
 
       <mat-grid-tile
+        
         *ngFor="let day of days"
         [ngClass]="{ weekend: isWeekend(day) }"
         >{{ day | date : "dd" }}</mat-grid-tile
