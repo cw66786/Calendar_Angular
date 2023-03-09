@@ -5,6 +5,8 @@
   </div>
   <button mat-fab (click)="nextMonth()">></button>
 </div>
+<div class="selected">Selected Day:  {{  selected | date: 'fullDate'}}
+</div>
 <div class="calendar-wrapper">
   <mat-grid-list cols="7" rowHeight="5:1" class="weekdays">
     <mat-grid-tile class="weekdays-border" *ngFor="let dayOfWeek of weekdays">{{
@@ -14,13 +16,15 @@
   <div class="days-wrapper">
     <mat-grid-list cols="7" rowHeight="2:1">
       <mat-grid-tile
-        class="days"
+        
         *ngFor="let empty of emptyDays"
       ></mat-grid-tile>
 
       <mat-grid-tile
+      
         *ngFor="let day of days"
-        [ngClass]="{ weekend: isWeekend(day) }"
+        [ngClass]="{ 'weekend': isWeekend(day), 'clicked': isSelected(day) }"
+        (click)="setSelected(day)" 
         >{{ day | date : "dd" }}</mat-grid-tile
       >
       <mat-grid-tile *ngFor="let empties of endingEmpties"></mat-grid-tile>

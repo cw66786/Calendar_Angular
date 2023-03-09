@@ -14,10 +14,12 @@
 }
 
 .current {
+    width: 20vw;
+    text-align: center;
   margin: 20px;
-
   font-size: 2rem;
 }
+
 button,
 .mat-fab {
   font-size: 1rem;
@@ -30,6 +32,15 @@ button,
   width: 2rem;
   background-color: mat-color($primary);
   color: mat-color($accent, A200);
+}
+
+.selected {
+    width: 100vw;
+    height: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.25rem;
 }
 
 .calendar-wrapper {
@@ -68,10 +79,16 @@ mat-grid-tile {
 }
 
 mat-grid-tile:hover {
-  background-color: mat-color($accent, A100);
-  color: mat-color($primary);
+    background-color: mat-color($accent, A100);
+    color: mat-color($primary);
 }
 
+
 .weekend {
-  color: mat-color($accent);
+    color: mat-color($accent);
+}
+
+.clicked{
+ background-color: mat-color($accent, A100);
+  color: mat-color($primary);
 }

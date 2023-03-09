@@ -13,6 +13,7 @@ export class CalendarComponent implements OnInit {
   currentDate: Date = new Date();
   emptyDays: string[] = [];
   endingEmpties: string[] = [];
+  selected: Date = new Date();
 
   constructor(private service: CalendarService) {
     [this.weekdays, this.months] = [this.service.weekdays, this.service.months];
@@ -39,27 +40,28 @@ export class CalendarComponent implements OnInit {
     this.emptyDays = this.service.getStartOfMonth(this.days);
     this.endingEmpties = this.service.getEndOfMonth(this.days, this.emptyDays);
   }
-
+  
   nextMonth() {
     if (this.days[0].getMonth() < 11) {
       this.currentDate.setMonth(this.currentDate.getMonth() + 1);
       this.currentDate = new Date(this.currentDate);
-
-      this.days = this.service.getDaysInMonth(
-        this.currentDate.getMonth(),
-        this.currentDate.getFullYear()
-      );
-      this.updateEmpties();
-    } else if (this.days[0].getMonth() === 11) {
-      this.currentDate.setFullYear(this.currentDate.getFullYear() + 1);
-      this.currentDate.setMonth(0);
-      this.currentDate = new Date(this.currentDate);
+      
       this.days = this.service.getDaysInMonth(
         this.currentDate.getMonth(),
         this.currentDate.getFullYear()
         );
         this.updateEmpties();
+      } else if (this.days[0].getMonth() === 11) {
+        this.currentDate.setFullYear(this.currentDate.getFullYear() + 1);
+        this.currentDate.setMonth(0);
+        this.currentDate = new Date(this.currentDate);
+        this.days = this.service.getDaysInMonth(
+          this.currentDate.getMonth(),
+          this.currentDate.getFullYear()
+        );
+        this.updateEmpties();
       }
+      this.selected = new Date(this.currentDate.setDate(1));
     }
     
     previousMonth() {
@@ -78,9 +80,21 @@ export class CalendarComponent implements OnInit {
           
           this.days = this.service.getDaysInMonth(
             this.currentDate.getMonth(),
-        this.currentDate.getFullYear()
-        );
-        this.updateEmpties();
-      }
+            this.currentDate.getFullYear()
+            );
+            this.updateEmpties();
+          }
+          this.selected = new Date(this.currentDate.setDate(1));
+        }
+        
+        isSelected(day: Date){
+          return day.getDate() === this.selected.getDate()? true : false;
+          
+        }
+        
+        setSelected(day: Date){
+      this.selected = new Date(day);
+      
     }
+
   }
