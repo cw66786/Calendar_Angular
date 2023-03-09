@@ -14,7 +14,7 @@
     }}</mat-grid-tile>
   </mat-grid-list>
   <div class="days-wrapper">
-    <mat-grid-list cols="7" rowHeight="2:1">
+    <mat-grid-list cols="7" [rowHeight]="rowHeight">
       <mat-grid-tile
         
         *ngFor="let empty of emptyDays"

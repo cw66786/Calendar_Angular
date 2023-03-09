@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CalendarService } from './calendar.service';
+import {BreakpointObserver} from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-calendar',
@@ -14,13 +15,15 @@ export class CalendarComponent implements OnInit {
   emptyDays: string[] = [];
   endingEmpties: string[] = [];
   selected: Date = new Date();
+  rowHeight!: string;
 
-  constructor(private service: CalendarService) {
+  constructor(private service: CalendarService, private breakpointObserver: BreakpointObserver) {
     [this.weekdays, this.months] = [this.service.weekdays, this.service.months];
   }
 
   ngOnInit(): void {
-    // this.service.date$.subscribe(res => this.currentDate = res);
+    this.rowHeight="2:1";
+   this.detectBreakpoint();
 
     this.days = this.service.getDaysInMonth(
       this.currentDate.getMonth(),
@@ -95,6 +98,13 @@ export class CalendarComponent implements OnInit {
         setSelected(day: Date){
       this.selected = new Date(day);
       
+    }
+
+
+    private detectBreakpoint(): void {
+      this.breakpointObserver.observe(['(max-width: 1100px)']).subscribe(result => {
+        this.rowHeight = result.matches ? '15vh' : '2:1';
+      });
     }
 
   }

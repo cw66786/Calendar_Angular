@@ -60,7 +60,7 @@ button,
   height: 5vh;
   width: 80vw;
 
-  font-size: 1.5rem;
+  font-size: 5rem;
   font-weight: 400;
   text-decoration: underline;
 }
@@ -91,4 +91,35 @@ mat-grid-tile:hover {
 .clicked{
  background-color: mat-color($accent, A100);
   color: mat-color($primary);
+}
+
+
+@media(max-width: 1300px) {
+    mat-grid-tile{
+        font-size: 1rem;
+    }
+    
+}
+
+@media(max-width: 840px){
+    
+    .current{
+        
+       font-size: 1.5rem;
+       
+    }
+    .selected{
+        font-size: 1rem;
+    }
+   
+
+
+    .weekdays,
+    .days-wrapper{
+        width: calc(100vw - 20px);
+        
+        
+        
+    }
+    
 }
